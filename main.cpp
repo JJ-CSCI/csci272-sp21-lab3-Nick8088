@@ -5,35 +5,64 @@
 //------------------------------
 
 // Put the assignment code here
+#include <iostream>
+using namespace std;
+class Quaternion{
+private:
+double a,b,c,d;
+public:
 
-class Quaternion {
+Quaternion(double a = 0 , double b =0 ,double c=0 ,double d=0){
+this->a=a;
+this->b=b;
+this->c=c;
+this->d=d;
+}
+Quaternion operator + (Quaternion & obj){
+Quaternion ans; // creating new object to return
+ ans.a = a + obj.a;
+ans.b = b + obj.b;
+ans.c = c + obj.c;
+ans.d = d + obj.d;
+return ans;
+}
+Quaternion operator - (Quaternion & obj){
+Quaternion ans; // creating new object to return
+ans.a = a - obj.a;
+ans.b = b - obj.b;
+ans.c = c - obj.c;
+ans.d = d - obj.d;
+return ans;
+}
+bool operator == (Quaternion & obj){
+if( a == obj.a && b == obj.b && c == obj.c && d == obj.d ) {
+return true;
+}
+return false;
+}
+Quaternion operator * (double m){
+Quaternion ans; // creating new object to return
+ans.a = a * m;
+ans.b = b * m;
+ans.c = c * m;
+ans.d = d * m;
+return ans;
+}
+void print(){
+cout<<a<<" "<<b<<" "<<c<<" "<<d<<"\n";
+}
 };
-
-//------------------------------
-//   DO NOT MODIFY TEST CASES
-//------------------------------
-TEST_CASE( "Assignment" ) {
-    SECTION( "q1" ) {
-        Quaternion q{1.0, 2.0, 3.0, 4.0};
-        Quaternion p{1.0, 2.0, 3.0, 4.0};
-        REQUIRE( q == p );
-    }
-    SECTION( "q2" ) {
-        Quaternion q{1.0, 2.0, 3.0, 4.0};
-        Quaternion p{1.0, 2.0, 3.0, 4.0};
-        Quaternion r{2.0, 4.0, 6.0, 8.0};
-        REQUIRE( (q + p) == r );
-    }
-    SECTION( "q3" ) {
-        Quaternion q{1.0, 2.0, 3.0, 4.0};
-        Quaternion p{1.0, 2.0, 3.0, 4.0};
-        Quaternion r{0.0, 0.0, 0.0, 0.0};
-        REQUIRE( (q - p) == r );
-    }
-    SECTION( "q3" ) {
-        Quaternion q{1.0, 2.0, 3.0, 4.0};
-        Quaternion r{2.0, 4.0, 6.0, 8.0};
-        REQUIRE( (q * 2.0) == r );
-    }
+int main() {
+Quaternion q1(2.3,5.5,6.7,8.8), q2(2.3,5.5,6.7,8.8);
+Quaternion a;
+a= q1 * 5;
+a.print();
+a= q1 + q1;
+a.print();
+a=q1 - q2;
+a.print();
+bool ans= q1 == q2;
+cout<<ans;
+return 0;
 }
 //------------------------------
